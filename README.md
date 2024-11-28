@@ -36,3 +36,8 @@ TongYi同学 是一款仿照 Kimi 智能助手开发的miniAPP，采用 Android 
 
 2. [将API Key配置到环境变量](https://help.aliyun.com/zh/model-studio/developer-reference/configure-api-key-through-environment-variables?spm=a2c4g.11186623.0.0.196779809sfCW3#e4cd73d544i3r)
 
+## 致谢
+
+- UI布局参考[Kimi智能助手](https://kimi.moonshot.cn/)，在此表示感谢。
+- GPT使用阿里云开放的[通义千问](https://help.aliyun.com/zh/model-studio/getting-started/?spm=a2c4g.11186623.help-menu-2400256.d_0.37331d1chssFSZ&scm=20140722.H_2400260._.OR_help-T_cn#DAS#zh-V_1)模型，在此表示感谢。
+- 项目中使用到的图标来自[阿里巴巴矢量图标库](https://www.iconfont.cn/)，在此表示感谢。
