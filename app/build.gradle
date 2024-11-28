@@ -1,0 +1,98 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.example.chatgpter'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.chatgpter"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    viewBinding {
+        enabled = true
+    }
+    dataBinding {
+        enabled true
+    }
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+    }
+
+    buildTypes.each { buildType ->
+        // 从系统环境变量中读取 API_KEY
+        String apiKey = System.getenv("DASHSCOPE_API_KEY")
+
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new GradleException("API_KEY environment variable is not set!")
+        }
+
+        // 将 API_KEY 注入到 BuildConfig
+        buildType.buildConfigField "String", "API_KEY", "\"${apiKey}\""
+    }
+
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    // Jetpack组件
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.5.1'
+    implementation 'androidx.room:room-runtime:2.5.1'
+    annotationProcessor 'androidx.room:room-compiler:2.5.1'
+
+    implementation "androidx.core:core:1.12.0"
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    implementation "androidx.activity:activity-ktx:1.7.2"
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
+
+    // MMKV
+    implementation 'com.tencent:mmkv:1.2.14'
+
+    // 加密支持
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
+
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation group: 'com.alibaba', name: 'dashscope-sdk-java', version: '2.15.4'
+
+    //markdown格式支持
+    implementation 'io.noties.markwon:core:4.6.2'
+
+
+
+}

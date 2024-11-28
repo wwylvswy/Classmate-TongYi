@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="session"
+            type="com.example.chatgpter.data.bean.ChatSession" />
+
+        <variable
+            name="clickListener"
+            type="com.example.chatgpter.utils.SessionClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:onClick="@{() -> clickListener.onClick(session)}">
+
+        <TextView
+            android:id="@+id/sessionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{session.summary}"
+            android:textSize="18sp"
+            android:textColor="#000"
+            tools:text="Sample Session Title" />
+    </LinearLayout>
+</layout>
+

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainvm"
+            type="com.example.chatgpter.viewmodel.MainViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <!-- 顶部栏，包含个人主页按钮 -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#F5F5F5"
+        android:elevation="4dp">
+
+        <ImageButton
+            android:id="@+id/circularImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="User Main Page"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user_avatar"
+            android:background="@drawable/circular_background"
+            android:onClick="@{() -> mainvm.onProfileClicked()}"/>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/iconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="New Chat"
+            android:src="@drawable/chatwithgpt_new_msg"
+            android:background="@null"
+            android:layout_marginTop="10dp"
+            android:padding="0dp"
+            android:onClick="@{() -> mainvm.onNewChatClicked()}"/>
+    </LinearLayout>
+
+    <!-- 聊天记录展示 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        app:messages="@{mainvm.messages}"/>
+
+    <LinearLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 添加图片按钮 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/selectFileButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:icon="@drawable/chatwithgpt_add_file"
+            app:iconGravity="textStart"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+            app:cornerRadius="50dp"
+            android:layout_marginRight="10dp"
+            style="?attr/materialButtonOutlinedStyle"
+            android:onClick="@{() -> mainvm.onSelectImageClicked()}"/>
+
+        <!-- 文本输入框 -->
+        <EditText
+            android:id="@+id/inputMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="输入消息"
+            android:background="@drawable/edittext_background"
+            android:padding="10dp"
+            android:inputType="textMultiLine"
+            android:minHeight="50dp"
+            android:text="@={mainvm.chatContent}"/>
+
+        <!-- 发送按钮 -->
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_sendbutton"
+            android:text="发送"
+            android:onClick="@{() -> mainvm.onSendClicked()}"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
